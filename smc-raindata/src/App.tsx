@@ -1,5 +1,7 @@
+/// <reference types="react-router-dom" />
+
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Dashboard from './components/Dashboard';
@@ -11,10 +13,10 @@ const App: React.FC = () => {
       <div className="flex flex-col min-h-screen">
         <Header />
         <main className="flex-grow container mx-auto px-4 py-8">
-          <Routes>
+          <Route>
             <Route path="/" element={<Dashboard />} />
             <Route path="/predict" element={<PredictionPage />} />
-          </Routes>
+          </Route>
         </main>
         <Footer />
       </div>

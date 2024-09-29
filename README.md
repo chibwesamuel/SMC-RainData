@@ -33,7 +33,7 @@ Samuel Mukosa Chibwe
 
 1. Clone the repository:
    ```
-   git clone https://github.com/yourusername/smc-raindata.git
+   git clone https://github.com/chibwesamuel/smc-raindata.git
    cd smc-raindata
    ```
 

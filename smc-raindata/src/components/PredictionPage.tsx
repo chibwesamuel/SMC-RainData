@@ -3,8 +3,8 @@ import React from 'react';
 const PredictionPage: React.FC = () => {
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-4">Rainfall Predictions</h1>
-      {/* Add prediction content here */}
+      <h2>Rainfall Prediction</h2>
+      <p>Use this page to view and generate rainfall predictions based on available data.</p>
     </div>
   );
 };

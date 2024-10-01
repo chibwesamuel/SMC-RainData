@@ -3,7 +3,8 @@ import React from 'react';
 const Dashboard: React.FC = () => {
   return (
     <div>
-      <h1>Dashboard is rendering!</h1>
+      <h2>Dashboard</h2>
+      <p>Welcome to the SMC RainData Dashboard.</p>
     </div>
   );
 };

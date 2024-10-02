@@ -1,16 +1,18 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Header from './components/Header';
-import Dashboard from './components/Dashboard';
+import { Header } from './components/Header';
+import { Dashboard } from './components/Dashboard';
+import { Footer } from './components/Footer'; // Adding Footer
+import './App.css';
 
 const App: React.FC = () => {
   return (
-    <Router>
+    <div className="flex flex-col min-h-screen">
       <Header />
-      <Routes>
-        <Route path="/" element={<Dashboard />} />
-      </Routes>
-    </Router>
+      <main className="flex-grow">
+        <Dashboard />
+      </main>
+      <Footer />
+    </div>
   );
 };
 

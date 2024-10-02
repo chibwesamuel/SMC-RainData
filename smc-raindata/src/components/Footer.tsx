@@ -1,11 +1,9 @@
 import React from 'react';
 
-const Footer: React.FC = () => {
+export const Footer = () => {
   return (
-    <footer className="bg-gray-800 text-white p-4 text-center">
+    <footer className="bg-blue-600 text-white text-center p-4 mt-auto">
       <p>&copy; 2024 SMC RainData. All rights reserved.</p>
     </footer>
   );
 };
-
-export default Footer;

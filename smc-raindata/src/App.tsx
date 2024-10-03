@@ -1,7 +1,7 @@
 import React from 'react';
 import { Header } from './components/Header';
 import { Dashboard } from './components/Dashboard';
-import { Footer } from './components/Footer'; // Adding Footer
+import { Footer } from './components/Footer';
 import './App.css';
 
 const App: React.FC = () => {

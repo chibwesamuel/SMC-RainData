@@ -1,104 +1,107 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './Dashboard.css'; // Import the CSS file
-
-// Define the type for the forecast data
-interface RainData {
-  date: string[];
-  temperature2mMax: number[];
-}
+import './Dashboard.css';
 
 export const Dashboard = () => {
-  const [city, setCity] = useState('');
-  const [rainData, setRainData] = useState<RainData | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [city, setCity] = useState<string>(''); // User input city
+  const [weatherData, setWeatherData] = useState<any | null>(null); // Weather data state
+  const [rainData, setRainData] = useState<any | null>(null); // Rainfall data state
+  const [loading, setLoading] = useState<boolean>(false); // Loading state
+  const [error, setError] = useState<string | null>(null); // Error state
 
-  // Function to get latitude and longitude based on city name
-  const getLatLongFromCity = async (cityName: string) => {
-    // You would normally use a geocoding API to get lat/long for a city
-    // For simplicity, we return static values for now (Berlin as an example)
-    return {
-      latitude: 52.52, // Replace with actual latitude
-      longitude: 13.41, // Replace with actual longitude
-    };
-  };
-
-  // Function to handle the search when a city is entered
-  const fetchRainData = async () => {
-    setLoading(true);
-    setError('');
+  // Function to fetch rainfall and weather data
+  const fetchWeatherAndRainData = async (lat: number, lon: number) => {
     try {
-      // Get latitude and longitude from the city
-      const { latitude, longitude } = await getLatLongFromCity(city);
+      // Fetch Weather data from OpenWeatherMap
+      const weatherResponse = await axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=68c1fc2bc835277163c924793d614cdd`
+      );
+      setWeatherData(weatherResponse.data);
 
-      // Make the request to Open-Meteo's Seasonal API
-      const params = {
-        latitude: latitude,
-        longitude: longitude,
-        daily: 'precipitation_sum', // Getting rainfall data
-      };
-      const url = 'https://seasonal-api.open-meteo.com/v1/seasonal';
-      const response = await axios.get(url, { params });
-
-      const daily = response.data.daily;
-
-      // Ensure that `daily.time` is an array of timestamps
-      const weatherData = {
-        date: daily.time.map((t: number) => new Date(t * 1000).toISOString().slice(0, 10)), // Dates as strings
-        temperature2mMax: daily.temperature_2m_max,
-      };
-
-      setRainData(weatherData);
+      // Fetch Rainfall data
+      const rainResponse = await axios.get(
+        `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=precipitation_sum&timezone=auto`
+      );
+      setRainData(rainResponse.data.daily);
     } catch (err) {
-      setError('Could not fetch data. Please try again.');
-    } finally {
-      setLoading(false);
+      setError('Failed to fetch data');
     }
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    fetchRainData();
+  // Fetch coordinates and call data APIs
+  useEffect(() => {
+    const fetchCoordinates = async (city: string) => {
+      setLoading(true);
+      try {
+        const geoResponse = await axios.get(
+          `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=68c1fc2bc835277163c924793d614cdd`
+        );
+
+        const { lat, lon } = geoResponse.data[0];
+        fetchWeatherAndRainData(lat, lon);
+      } catch (err) {
+        setError('Failed to fetch coordinates');
+      }
+      setLoading(false);
+    };
+
+    if (city) {
+      fetchCoordinates(city);
+    }
+  }, [city]); // `city` is the dependency
+
+  // Handle user input
+  const handleCityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCity(e.target.value);
   };
 
   return (
-    <div className="dashboard-container">
-      <h2>Seasonal Rainfall Prediction Dashboard</h2>
-      <form onSubmit={handleSubmit} className="form-container">
+    <div className="container">
+      <div className="search">
         <input
           type="text"
           value={city}
-          onChange={(e) => setCity(e.target.value)}
-          placeholder="Enter city"
-          required
-          className="input-field"
+          onChange={handleCityChange}
+          placeholder="Enter a city"
         />
-        <button type="submit" className="submit-btn">
-          Get Forecast
-        </button>
-      </form>
-
-      {loading && <p>Loading...</p>}
-      {error && <p className="text-red-500">{error}</p>}
-
-      {rainData && rainData.date instanceof Array && (
-        <div>
-          <h3>Seasonal Rainfall Forecast for {city}</h3>
-          <ul className="forecast-list">
-            {rainData.date.map((date, index) => (
-              <li key={index} className="forecast-item">
-                <strong>{date}</strong>
-                <div className="weather-details">
-                  <span>Max Temperature: {rainData.temperature2mMax[index]}°C</span>
-                </div>
-              </li>
-            ))}
-          </ul>
+        {loading && <p>Loading...</p>}
+      </div>
+      {error && <p>{error}</p>}
+      {weatherData && (
+        <div className="card">
+          <h2>Weather in {weatherData.name}</h2>
+          <img
+            src={`images/${weatherData.weather[0].main.toLowerCase()}.png`}
+            alt={weatherData.weather[0].main}
+            className="weather-icon"
+          />
+          <h1 className="temp">{Math.round(weatherData.main.temp)}°C</h1>
+          <div className="details">
+            <div className="col">
+              <p className="humidity">{weatherData.main.humidity}%</p>
+              <p>Humidity</p>
+            </div>
+            <div className="col">
+              <p className="wind">{Math.round(weatherData.wind.speed)} km/h</p>
+              <p>Wind Speed</p>
+            </div>
+          </div>
+          {/* Rainfall Predictions Section */}
+          {rainData && (
+            <div className="rain-predictions">
+              <h3>Rainfall Predictions</h3>
+              <div className="rain-row">
+                {rainData.time.map((date: string, index: number) => (
+                  <div className="rain-col" key={index}>
+                    <p>{new Date(date).toLocaleDateString()}</p>
+                    <p>{rainData.precipitation_sum[index]} mm</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>
   );
 };
-
-export default Dashboard;

@@ -46,20 +46,16 @@ body {
   background: linear-gradient(135deg, #03cdba, #2b356a);
   border-radius: 20px;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers everything inside the card */
   text-align: center;
 }
 
-.weather-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-
 .weather-icon {
-  display: flex;
-  justify-content: center;
-  width: 90px;
-  margin: 0px;
+  width: 100px; /* Adjust width as needed */
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .temp {
@@ -68,8 +64,8 @@ body {
 
 .details {
   display: flex;
-  justify-content: center;
-  gap: 220px; 
+  justify-content: space-around; /* Distributes details evenly */
+  width: 100%; /* Make sure details take full width */
   margin-top: 30px;
 }
 
@@ -91,7 +87,13 @@ body {
 
 .rain-predictions {
   margin-top: 20px;
-  background-color: rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.rain-predictions h1 {
+  margin-top: 20px;
+  background-color: #009879;
   padding: 15px;
   border-radius: 10px;
 }

@@ -38,27 +38,21 @@ export const Dashboard = () => {
     }
   };
 
-  // Fetch coordinates and call data APIs
-  useEffect(() => {
-    const fetchCoordinates = async (city: string) => {
-      setLoading(true);
-      try {
-        const geoResponse = await axios.get(
-          `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=68c1fc2bc835277163c924793d614cdd`
-        );
+  // Fetch coordinates when the user clicks the search button
+  const handleSearch = async () => {
+    setLoading(true);
+    try {
+      const geoResponse = await axios.get(
+        `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=68c1fc2bc835277163c924793d614cdd`
+      );
 
-        const { lat, lon } = geoResponse.data[0];
-        fetchWeatherAndRainData(lat, lon);
-      } catch (err) {
-        setError('Failed to fetch coordinates');
-      }
-      setLoading(false);
-    };
-
-    if (city) {
-      fetchCoordinates(city);
+      const { lat, lon } = geoResponse.data[0];
+      await fetchWeatherAndRainData(lat, lon);
+    } catch (err) {
+      setError('Failed to fetch coordinates');
     }
-  }, [city]); // `city` is the dependency
+    setLoading(false);
+  };
 
   // Handle user input
   const handleCityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -95,6 +89,7 @@ export const Dashboard = () => {
           onChange={handleCityChange}
           placeholder="Enter a city"
         />
+        <button onClick={handleSearch}>Search</button>
         {loading && <p>Loading...</p>}
       </div>
       {error && <p>{error}</p>}
@@ -109,12 +104,12 @@ export const Dashboard = () => {
           <h1 className="temp">{Math.round(weatherData.main.temp)}°C</h1>
           <div className="details">
             <div className="col">
-              <img src={humidityIcon} alt="Humidity" className="icon" /> {/* Humidity icon */}
+              <img src={humidityIcon} alt="Humidity" className="icon" />
               <p className="humidity">{weatherData.main.humidity}%</p>
               <p>Humidity</p>
             </div>
             <div className="col">
-              <img src={windIcon} alt="Wind Speed" className="icon" /> {/* Wind speed icon */}
+              <img src={windIcon} alt="Wind Speed" className="icon" />
               <p className="wind">{Math.round(weatherData.wind.speed)} km/h</p>
               <p>Wind Speed</p>
             </div>

@@ -23,10 +23,11 @@ body {
 }
 
 .search {
-  width: 100%;
+  width: 50%;
   padding: 10px;
   display: flex;
   justify-content: space-between;
+  align-items: baseline;
 }
 
 .search input {
@@ -34,8 +35,8 @@ body {
   outline: 0;
   background: #ebfffc;
   color: #000;
-  padding: 10px 25px;
-  height: 60px;
+  padding: 5px 10px;
+  height: 30px;
   border-radius: 30px;
   flex: 1;
   margin-right: 16px;
@@ -53,24 +54,24 @@ body {
 }
 
 .weather-icon {
-  width: 100px; /* Adjust width as needed */
-  margin-top: 20px;
-  margin-bottom: 20px;
+  width: 50px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .temp {
-  font-size: 40px;
+  font-size: 35px;
 }
 
 .details {
   display: flex;
   justify-content: space-around; /* Distributes details evenly */
-  width: 100%; /* Make sure details take full width */
+  width: 100%; /* This is to ensure details take full width */
   margin-top: 30px;
 }
 
 .icon {
-  width: 35px;
+  width: 25px;
   margin-right: 5px;
   vertical-align: middle;
 }
@@ -82,13 +83,14 @@ body {
 }
 
 .humidity, .wind {
-  font-size: 28px;
+  font-size: 15px;
 }
 
 .rain-predictions {
   margin-top: 20px;
   padding: 15px;
   border-radius: 10px;
+  width: 100%;
 }
 
 .rain-predictions h1 {

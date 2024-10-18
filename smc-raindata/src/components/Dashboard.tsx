@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import './Dashboard.css';
 
@@ -90,7 +90,7 @@ export const Dashboard = () => {
           placeholder="Enter a city"
         />
         <button onClick={handleSearch}>Search</button>
-        {loading && <p>Loading...</p>}
+        {loading && <p>Getting your data...</p>}
       </div>
       {error && <p>{error}</p>}
       {weatherData && (

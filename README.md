@@ -1,3 +1,6 @@
+Here's the updated `README.md` file with the screenshot included:
+
+```markdown
 # SMC RainData
 
 ## Rainfall Pattern Prediction App for Farmers
@@ -25,6 +28,9 @@ Samuel Mukosa Chibwe
 - Customizable alerts and notifications
 - Mobile-responsive design
 
+### Screenshot
+![SMC RainData Screenshot](./src/assets/smc%20raindata.png)
+
 ### Prerequisites
 - Node.js (v14.0.0 or later)
 - npm (v6.0.0 or later)
@@ -32,13 +38,13 @@ Samuel Mukosa Chibwe
 ### Setup Instructions
 
 1. Clone the repository:
-   ```
+   ```bash
    git clone https://github.com/chibwesamuel/smc-raindata.git
    cd smc-raindata
    ```
 
 2. Install dependencies:
-   ```
+   ```bash
    npm install
    ```
 
@@ -46,7 +52,7 @@ Samuel Mukosa Chibwe
    Create a `.env` file in the root directory and add necessary variables (e.g., API keys).
 
 4. Start the development server:
-   ```
+   ```bash
    npm start
    ```
 
@@ -54,13 +60,13 @@ Samuel Mukosa Chibwe
 
 ### Testing
 Run the test suite with:
-```
+```bash
 npm test
 ```
 
 ### Building for Production
 To create a production build:
-```
+```bash
 npm run build
 ```
 
@@ -69,3 +75,4 @@ We welcome contributions! Please see our [CONTRIBUTING.md](CONTRIBUTING.md) for 
 
 ### License
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+```

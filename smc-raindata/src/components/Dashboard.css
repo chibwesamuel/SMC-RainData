@@ -128,3 +128,39 @@ body {
   font-size: 14px;
   margin: 5px 0;
 }
+
+.rain-tiles {
+  display: flex;
+  flex-wrap: wrap; /* Allows tiles to wrap */
+  justify-content: space-between;
+  gap: 2px; /* Gap between tiles */
+  margin-top: 5px;
+}
+
+.rain-tile {
+  background: #03cdba;
+  color: #fff;
+  padding: 5px;
+  border-radius: 10px;
+  width: 13%; /* Adjust width for tiles per row */
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.rain-day {
+  font-weight: bold;
+  font-size: 12px;
+  color: #ffffff;
+}
+
+.rain-date {
+  font-size: 10px;
+  margin-top: 2px;
+  color: #f1f1f1;
+}
+
+.rain-amount {
+  font-size: 14px;
+  margin-top: 3px;
+}
+

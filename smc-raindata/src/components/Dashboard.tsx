@@ -117,16 +117,23 @@ export const Dashboard = () => {
           {/* Rainfall Predictions Section */}
           {rainData && (
             <div className="rain-predictions">
-              <h2>Rainfall Predictions</h2>
-              <div className="rain-row">
-                {rainData.time.map((date: string, index: number) => (
-                  <div className="rain-col" key={index}>
-                    <p>{new Date(date).toLocaleDateString()}</p>
-                    <p>{rainData.precipitation_sum[index]} mm</p>
-                  </div>
-                ))}
-              </div>
+            <h2>Rainfall Predictions</h2>
+            <div className="rain-tiles">
+              {rainData.time.map((date: string, index: number) => (
+                <div className="rain-tile" key={index}>
+                  <p className="rain-day">
+                    {new Date(date).toLocaleDateString('en-US', { weekday: 'short' })}
+                  </p>
+                  <p className="rain-date">
+                    {new Date(date).toLocaleDateString()}
+                  </p>
+                  <p className="rain-amount">
+                    {rainData.precipitation_sum[index]} mm
+                  </p>
+                </div>
+              ))}
             </div>
+          </div>
           )}
         </div>
       )}

@@ -1,6 +1,3 @@
-Here's the updated `README.md` file with the screenshot included:
-
-```markdown
 # SMC RainData
 
 ## Rainfall Pattern Prediction App for Farmers

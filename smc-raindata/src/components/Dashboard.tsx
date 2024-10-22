@@ -90,7 +90,7 @@ export const Dashboard = () => {
           placeholder="Enter a city"
         />
         <button onClick={handleSearch}>Search</button>
-        {loading && <p>Getting your data...</p>}
+        {loading && <p>Searching...</p>}
       </div>
       {error && <p>{error}</p>}
       {weatherData && (

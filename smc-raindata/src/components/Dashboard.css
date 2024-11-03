@@ -176,3 +176,22 @@ body {
   font-size: 14px;
   margin: 5px 0;
 }
+
+.search-button {
+  background-color: #03cdba;
+  color: white;
+  border: none;
+  padding: 5px 15px;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 18px;
+}
+
+.search-button:hover {
+  background-color: #029f8c;
+}
+
+.search-button:active {
+  background-color: #028b78;
+}

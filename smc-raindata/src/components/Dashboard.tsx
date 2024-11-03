@@ -73,6 +73,16 @@ export const Dashboard = () => {
   };
 
   /**
+   * handleKeyDown triggers the search function when the Enter key is pressed.
+   * @param e - Keyboard event from input field
+   */
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSearch(); // Trigger search on Enter key press
+    }
+  };
+
+  /**
    * getWeatherIcon selects the appropriate weather icon based on the main weather condition.
    * @param condition - Primary weather condition (e.g., 'Clear', 'Clouds')
    * @returns Path to the corresponding icon image
@@ -117,9 +127,10 @@ export const Dashboard = () => {
           type="text"
           value={city}
           onChange={handleCityChange}
+          onKeyDown={handleKeyDown} // Added key down event listener for Enter key
           placeholder="Enter a city"
         />
-        <button onClick={handleSearch}>Search</button>
+        <button onClick={handleSearch} className="search-button">Search</button> {/* Styled button */}
         {loading && <p>Searching...</p>}
       </div>
       {error && <p>{error}</p>}

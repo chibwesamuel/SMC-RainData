@@ -164,3 +164,15 @@ body {
   margin-top: 3px;
 }
 
+.suggestions {
+  background-color: #2b356a;
+  border-radius: 10px;
+  margin-top: 10px;
+  padding: 10px;
+  color: #03cdba;
+}
+
+.suggestion {
+  font-size: 14px;
+  margin: 5px 0;
+}
